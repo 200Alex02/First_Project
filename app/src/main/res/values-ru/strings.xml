@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Первый_Проект</string>
+    <string name="products">Продукты</string>
+    <string name="hello_blank_fragment">Привет пустой фрагмент</string>
+    <string name="home">Домой</string>
+    <string name="favourite">Избранное</string>
+    <string name="settings">Настройки</string>
+    <string name="night_theme">Ночная тема</string>
+    <string name="toast_add">Этот элемент уже добавлен</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="full_screen">Полноэкранный режим</string>
+    <string name="language">Язык</string>
+    <string name="title_activity_splash_screen">Сплэш Скрин</string>
+    <string name="you_don_t_have_any_selected_products_yet">У вас еще нет ни одного выбранного товара</string>
+    <string name="add_a_product">Добавить продукт</string>
+    <string name="lang">РУСС</string>
+    <string name="add_your_product">Добавьте свой продукт</string>
+    <string name="next">Далее</string>
+    <string name="enter_the_description_for_your_product">Введите описание для вашего продукта</string>
+    <string name="enter_the_brand_of_your_product">Введите бренд вашего продукта</string>
+    <string name="insert_a_link_to_a_photo_of_your_product">Вставьте ссылку на фото вашего продукта</string>
+    <string name="preview_your_product">Превью вашего продукта</string>
+
+</resources>

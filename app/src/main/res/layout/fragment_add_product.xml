@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.AddProductFragment">
+
+    <TextView
+        android:id="@+id/add_element_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_your_product"
+        android:textColor="#5E5B5B"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <EditText
+        android:id="@+id/link_photo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        android:hint="@string/insert_a_link_to_a_photo_of_your_product"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_element_text"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/brand_product"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        android:hint="@string/enter_the_brand_of_your_product"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/link_photo"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/description_product"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        android:textColor="@color/black"
+        android:hint="@string/enter_the_description_for_your_product"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/brand_product"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/preview_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_product"
+        android:layout_marginTop="10dp"
+        android:text="@string/next"
+        android:textStyle="normal"
+        android:textSize="15sp"
+        android:textAllCaps="false"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

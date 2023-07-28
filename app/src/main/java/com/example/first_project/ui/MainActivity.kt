@@ -1,26 +1,71 @@
 package com.example.first_project.ui
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.first_project.R
 import com.example.first_project.databinding.ActivityMainBinding
+import com.example.first_project.ui.fragments.AddProductFragment
+import com.example.first_project.ui.fragments.FavouriteFragment
+import com.example.first_project.ui.fragments.MainFragment
+import com.example.first_project.ui.fragments.SettingsFragment
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        navController = findNavController(R.id.nav_host_fragment)
+        setupActionBarWithNavController(navController)
         binding.bottomNavView.setupWithNavController(navController)
-        /*binding.bottomNavView.itemIconTintList = null*/
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.up_menu, menu)
+        return true
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+/*
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.add_your_elements -> {
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment, AddProductFragment())
+                    .commit()
+
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }*/
+
+    /*override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        val menuItem = menu?.findItem(R.id.add_your_elements)
+        menuItem?.isVisible =
+            when (supportFragmentManager.findFragmentById(R.id.nav_host_fragment)) {
+                is MainFragment -> true
+                else -> false
+            }
+        return true
+    }*/
 }
+

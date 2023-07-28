@@ -4,7 +4,7 @@ import com.example.first_project.ui.products.Product
 
 val products = mutableListOf(
     Product(
-        "Optimum Nutrition 100% Whey Gold Standard",
+        "Optimum Nutrition",
         "Это своевременный легкоусвояемый источник восполнения белка в организме. Что может быть проще, чем смешать протеиновый коктейль, и выпить его?",
         "https://put-sily.ru/wp-content/uploads/6/3/b/63ba56c3a45653446170d68a464f19d5.jpeg"
     ),

@@ -39,7 +39,9 @@
         tools:layout="@layout/fragment_add_product" >
         <action
             android:id="@+id/action_addProductFragment_to_previewFragment"
-            app:destination="@id/previewFragment" />
+            app:destination="@id/previewFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/previewFragment"

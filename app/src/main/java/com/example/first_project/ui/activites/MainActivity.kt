@@ -4,19 +4,12 @@ package com.example.first_project.ui.activites
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuItem
-import androidx.core.splashscreen.SplashScreen
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.first_project.R
 import com.example.first_project.databinding.ActivityMainBinding
-import com.example.first_project.ui.fragments.AddProductFragment
-import com.example.first_project.ui.fragments.FavouriteFragment
-import com.example.first_project.ui.fragments.MainFragment
-import com.example.first_project.ui.fragments.SettingsFragment
 
 
 class MainActivity : AppCompatActivity() {

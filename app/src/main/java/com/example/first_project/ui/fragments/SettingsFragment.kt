@@ -63,21 +63,11 @@ class SettingsFragment : Fragment() {
         binding.fullScreenSwitch.setOnCheckedChangeListener { _, isChecked ->
 
             if (isChecked) {
-                activity?.window?.decorView?.systemUiVisibility = (
-                        View.SYSTEM_UI_FLAG_IMMERSIVE
-                                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                                or View.SYSTEM_UI_FLAG_FULLSCREEN
-                                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        )
-                activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                hideSystemUI()
+
             } else {
-                activity?.window?.decorView?.systemUiVisibility = (
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        )
-                activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                showSystemUI()
+
             }
 
         }
@@ -114,6 +104,16 @@ class SettingsFragment : Fragment() {
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
         activity?.recreate()
+    }
+
+    private fun hideSystemUI() {
+        activity?.window?.decorView?.systemUiVisibility =
+            (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+    }
+
+    private fun showSystemUI() {
+        activity?.window?.decorView?.systemUiVisibility =
+            (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION and View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
     }
 
 }

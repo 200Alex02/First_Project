@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/item_home"
-        android:name="com.example.first_project.ui.fragments.MainFragment"
+        android:name="com.example.first_project.ui.fragments.HomeFragment"
         android:label="@string/products"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_item_home_to_addProductFragment"
             app:destination="@id/addProductFragment" />

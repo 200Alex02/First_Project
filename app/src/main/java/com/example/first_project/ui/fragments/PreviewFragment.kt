@@ -12,29 +12,15 @@ import com.bumptech.glide.Glide
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentPreviewBinding
 import com.example.first_project.products
+import com.example.first_project.ui.BaseFragment
 import com.example.first_project.ui.products.Product
 import com.google.gson.Gson
 
 
-class PreviewFragment : Fragment() {
-
-    private lateinit var binding: FragmentPreviewBinding
+class PreviewFragment : BaseFragment<FragmentPreviewBinding>(
+    FragmentPreviewBinding::inflate
+) {
     private lateinit var sharedPreferencesProduct: SharedPreferences
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        binding = FragmentPreviewBinding.inflate(inflater)
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

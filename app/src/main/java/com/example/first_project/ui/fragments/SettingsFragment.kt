@@ -1,13 +1,9 @@
 package com.example.first_project.ui.fragments
 
 import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
-import android.content.res.Configuration
+
 import android.os.Bundle
-import android.view.ContextMenu
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -21,21 +17,12 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat.recreate
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentSettingsBinding
+import com.example.first_project.ui.BaseFragment
 import java.util.Locale
 
-class SettingsFragment : Fragment() {
-
-    private lateinit var binding: FragmentSettingsBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSettingsBinding.inflate(inflater)
-
-        return binding.root
-    }
-
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
+    FragmentSettingsBinding::inflate
+) {
     @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

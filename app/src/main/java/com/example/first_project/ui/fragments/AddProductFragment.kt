@@ -10,29 +10,14 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentAddProductBinding
+import com.example.first_project.ui.BaseFragment
 import com.example.first_project.ui.products.Product
 import com.google.gson.Gson
 
-class AddProductFragment : Fragment() {
-
-    private lateinit var binding: FragmentAddProductBinding
+class AddProductFragment : BaseFragment<FragmentAddProductBinding>(
+    FragmentAddProductBinding::inflate
+) {
     private lateinit var sharedPreferencesProduct: SharedPreferences
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        binding = FragmentAddProductBinding.inflate(inflater)
-
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPreferencesProduct =

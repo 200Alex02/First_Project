@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentHomeBinding
 import com.example.first_project.ui.adapter.ProductAdapter
-import com.example.first_project.databinding.FragmentMainBinding
 import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.products
 import com.example.first_project.ui.BaseFragment
@@ -66,8 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_item_home_to_addProductFragment)
         }
-
-        return binding.root
+        
     }
 
 }

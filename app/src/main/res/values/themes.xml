@@ -2,17 +2,17 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.First_Project" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#FF8B14</item>
-        <item name="colorPrimaryVariant">#FF8B14</item>
+        <item name="colorPrimary">#870187</item>
+        <item name="colorPrimaryVariant">#870187</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#FF8B14</item>
-        <item name="colorSecondaryVariant">#FF8B14</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">#870187</item>
+        <item name="colorSecondaryVariant">#870187</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">#FF8B14</item>
+        <item name="android:statusBarColor">#DC1DDC</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">#F8845F</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">#9E439E</item>
         <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/weightlifting_svgrepo_com</item>
     </style>
 

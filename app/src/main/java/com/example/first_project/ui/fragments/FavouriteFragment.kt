@@ -1,22 +1,14 @@
 package com.example.first_project.ui.fragments
 
-import android.annotation.SuppressLint
+
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentFavouriteBinding
 import com.example.first_project.ui.BaseFragment
 import com.example.first_project.ui.adapter.FavouriteAdapter
-import com.example.first_project.ui.adapter.ProductAdapter
 import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.ui.products.Product
 

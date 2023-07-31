@@ -20,5 +20,6 @@
     <string name="enter_the_brand_of_your_product">Введите бренд вашего продукта</string>
     <string name="insert_a_link_to_a_photo_of_your_product">Вставьте ссылку на фото вашего продукта</string>
     <string name="preview_your_product">Превью вашего продукта</string>
+    <string name="fill_in_all_the_fiels">Заполните все поля</string>
 
 </resources>

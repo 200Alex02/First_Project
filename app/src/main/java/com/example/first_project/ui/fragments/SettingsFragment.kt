@@ -1,20 +1,14 @@
 package com.example.first_project.ui.fragments
 
 import android.annotation.SuppressLint
-
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat.recreate
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentSettingsBinding
 import com.example.first_project.ui.BaseFragment
@@ -23,6 +17,8 @@ import java.util.Locale
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
     FragmentSettingsBinding::inflate
 ) {
+
+    private lateinit var sharedPreferences: SharedPreferences
     @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,7 +28,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 binding.nightTextView.text = getString(R.string.night_theme)
-
 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -68,13 +63,11 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
             when (it.itemId) {
                 R.id.english_item -> {
                     change("en")
-                    binding.btnLanguage.text = "LANG"
                     true
                 }
 
                 R.id.russian_item -> {
                     change("ru")
-                    binding.btnLanguage.text = "РУСС"
                     true
                 }
 

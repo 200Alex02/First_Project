@@ -20,6 +20,7 @@
     <string name="enter_the_brand_of_your_product">Enter the brand of your product</string>
     <string name="insert_a_link_to_a_photo_of_your_product">Insert a link to a photo of your product</string>
     <string name="preview_your_product">Preview your product</string>
+    <string name="fill_in_all_the_fiels">Fill in all the fields</string>
 
 
     <string-array name="language_options">

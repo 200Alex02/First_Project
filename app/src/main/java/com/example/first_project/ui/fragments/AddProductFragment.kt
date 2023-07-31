@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentAddProductBinding
@@ -22,12 +23,20 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>(
         super.onViewCreated(view, savedInstanceState)
         sharedPreferencesProduct =
             requireActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+
         binding.previewButton.setOnClickListener {
+            if (binding.brandProduct.text.isNotEmpty() && binding.descriptionProduct.text.isNotEmpty() &&
+                binding.linkPhoto.text.isNotEmpty()
+            ) {
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_addProductFragment_to_previewFragment)
 
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_addProductFragment_to_previewFragment)
+                saveData()
 
-            saveData()
+            } else {
+                Toast.makeText(requireActivity(), getString(R.string.fill_in_all_the_fiels), Toast.LENGTH_SHORT).show()
+            }
+
         }
 
     }

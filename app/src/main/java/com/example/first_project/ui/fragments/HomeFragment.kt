@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 Unit
             }
             else {
-                val toast = Toast.makeText(requireContext(), getString(R.string.toast_add), Toast.LENGTH_SHORT).show()
+                 Toast.makeText(requireContext(), getString(R.string.toast_add), Toast.LENGTH_SHORT).show()
             }
         }
         adapter.onItemClick = onItemClick

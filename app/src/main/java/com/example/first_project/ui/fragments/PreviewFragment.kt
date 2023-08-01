@@ -39,7 +39,7 @@ class PreviewFragment : BaseFragment<FragmentPreviewBinding>(
                 .placeholder(R.drawable.error)
                 .into(binding.picture)
 
-            binding.icDelete.setOnClickListener {
+            binding.addProductBtn.setOnClickListener {
                 if (!products.contains(productData)) {
                     products.add(productData)
                     Navigation.findNavController(binding.root)

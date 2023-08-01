@@ -16,10 +16,11 @@
     <string name="lang">EN</string>
     <string name="add_your_product">Add your product</string>
     <string name="next">Next</string>
-    <string name="enter_the_description_for_your_product">Enter the description for your product</string>
-    <string name="enter_the_brand_of_your_product">Enter the brand of your product</string>
-    <string name="insert_a_link_to_a_photo_of_your_product">Insert a link to a photo of your product</string>
+    <string name="enter_the_description_for_your_product">Enter the description for your product:</string>
+    <string name="enter_the_brand_of_your_product">Enter the brand of your product:</string>
+    <string name="insert_a_link_to_a_photo_of_your_product">Insert a link to a photo of your product:</string>
     <string name="preview_your_product">Preview your product</string>
+    <string name="please_fill_in_this_field">Please fill in this field</string>
 
 
     <string-array name="language_options">

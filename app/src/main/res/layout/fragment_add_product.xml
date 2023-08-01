@@ -10,74 +10,89 @@
         android:id="@+id/add_element_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="@string/add_your_product"
         android:textColor="#5E5B5B"
-        android:textStyle="bold"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="40dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/link_photo"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_link"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
         android:hint="@string/insert_a_link_to_a_photo_of_your_product"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toTopOf="@id/til_brand"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_element_text"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/add_element_text">
 
-    <EditText
-        android:id="@+id/brand_product"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_brand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:hint="@string/enter_the_brand_of_your_product"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toTopOf="@id/til_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/link_photo"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/til_link">
 
-    <EditText
-        android:id="@+id/description_product"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_brand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        android:textColor="@color/black"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
         android:hint="@string/enter_the_description_for_your_product"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        app:layout_constraintBottom_toTopOf="@id/preview_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/brand_product"
-        android:layout_marginTop="20dp"/>
+        app:layout_constraintTop_toBottomOf="@id/til_brand">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/preview_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_product"
         android:layout_marginTop="10dp"
         android:text="@string/next"
-        android:textStyle="normal"
+        android:textAllCaps="false"
         android:textSize="15sp"
-        android:textAllCaps="false"/>
-
-
-
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

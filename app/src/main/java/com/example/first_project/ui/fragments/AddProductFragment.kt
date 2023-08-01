@@ -22,27 +22,45 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>(
         super.onViewCreated(view, savedInstanceState)
         sharedPreferencesProduct =
             requireActivity().getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+
         binding.previewButton.setOnClickListener {
 
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_addProductFragment_to_previewFragment)
+            if (!binding.etBrand.text.isNullOrEmpty() && !binding.etLink.text.isNullOrEmpty()
+                && !binding.etDescription.text.isNullOrEmpty()
+            ) {
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_addProductFragment_to_previewFragment)
 
-            saveData()
+                saveData()
+            } else {
+                setErrorForEditText()
+            }
         }
-
     }
 
     private fun saveData() {
         val addProduct = Product(
-            binding.brandProduct.text.toString(),
-            binding.descriptionProduct.text.toString(),
-            binding.linkPhoto.text.toString()
+            binding.etBrand.text.toString(),
+            binding.etDescription.text.toString(),
+            binding.etLink.text.toString()
         )
 
         val gson = Gson()
         val productDataGson = gson.toJson(addProduct)
 
         sharedPreferencesProduct.edit().putString(KEY_PRODUCT, productDataGson).apply()
+    }
+
+    private fun setErrorForEditText() {
+        if (binding.etLink.text.isNullOrEmpty()) {
+            binding.etLink.error = getString(R.string.please_fill_in_this_field)
+
+        } else if (binding.etBrand.text.isNullOrEmpty()) {
+            binding.etBrand.error = getString(R.string.please_fill_in_this_field)
+
+        } else if (binding.etDescription.text.isNullOrEmpty()) {
+            binding.etDescription.error = getString(R.string.please_fill_in_this_field)
+        }
     }
 
     companion object {

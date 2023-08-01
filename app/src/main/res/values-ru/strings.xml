@@ -16,9 +16,10 @@
     <string name="lang">РУСС</string>
     <string name="add_your_product">Добавьте свой продукт</string>
     <string name="next">Далее</string>
-    <string name="enter_the_description_for_your_product">Введите описание для вашего продукта</string>
-    <string name="enter_the_brand_of_your_product">Введите бренд вашего продукта</string>
-    <string name="insert_a_link_to_a_photo_of_your_product">Вставьте ссылку на фото вашего продукта</string>
+    <string name="enter_the_description_for_your_product">Введите описание для вашего продукта:</string>
+    <string name="enter_the_brand_of_your_product">Введите бренд вашего продукта:</string>
+    <string name="insert_a_link_to_a_photo_of_your_product">Вставьте ссылку на фото вашего продукта:</string>
     <string name="preview_your_product">Превью вашего продукта</string>
+    <string name="please_fill_in_this_field">Пожалуйста, заполните это поле</string>
 
 </resources>

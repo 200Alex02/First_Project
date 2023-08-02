@@ -5,9 +5,10 @@ import android.os.Parcelable
 
 data class Product(
     val brand: String, val description: String,
-    val picture: String, var likeElement: Boolean = false
+    val picture: String, val cost: String, var likeElement: Boolean = false
 ): Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
         parcel.readString().toString(),
@@ -19,6 +20,7 @@ data class Product(
         parcel.writeString(brand)
         parcel.writeString(description)
         parcel.writeString(picture)
+        parcel.writeString(cost)
         parcel.writeByte(if (likeElement) 1 else 0)
     }
 

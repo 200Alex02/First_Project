@@ -42,7 +42,8 @@ class AddProductFragment : BaseFragment<FragmentAddProductBinding>(
         val addProduct = Product(
             binding.etBrand.text.toString(),
             binding.etDescription.text.toString(),
-            binding.etLink.text.toString()
+            binding.etLink.text.toString(),
+            ""
         )
 
         val gson = Gson()

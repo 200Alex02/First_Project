@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#DC1DDC</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">#9E439E</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">#F473F4</item>
         <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/weightlifting_svgrepo_com</item>
     </style>
 

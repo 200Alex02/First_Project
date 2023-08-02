@@ -1,6 +1,7 @@
 package com.example.first_project.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,11 +14,11 @@ import com.example.first_project.R
 import com.example.first_project.databinding.ItemProductsBinding
 import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.products
+import com.example.first_project.ui.fragments.DetailProductFragment
 
 class ProductAdapter() : ListAdapter<Product, ProductAdapter.ProductHolder>(DiffCallBack()) {
     var onItemClick: (product: Product) -> Unit = { _ -> }
-    var onDeleteClick: (product: Product) -> Unit = { _ -> }
-
+    var onFullItemClick: (product: Product) -> Unit = {_ ->}
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding = ItemProductsBinding.bind(itemView)
@@ -38,10 +39,11 @@ class ProductAdapter() : ListAdapter<Product, ProductAdapter.ProductHolder>(Diff
                 binding.favouriteIcon.setImageResource(R.drawable.ic_favourite_red)
             }
 
-            /*icDelete.setOnClickListener {
-                onDeleteClick(product)
-            }*/
+            itemView.setOnClickListener {
+                onFullItemClick(product)
+            }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {
@@ -66,4 +68,5 @@ class ProductAdapter() : ListAdapter<Product, ProductAdapter.ProductHolder>(Diff
             }
         }
     }
+
 }

@@ -17,6 +17,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_item_home_to_detailProductFragment2"
+            app:destination="@id/detailProductFragment2" />
     </fragment>
 
     <fragment
@@ -57,5 +60,15 @@
         <action
             android:id="@+id/action_previewFragment_to_item_home"
             app:destination="@id/item_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailProductFragment2"
+        android:name="com.example.first_project.ui.fragments.DetailProductFragment"
+        android:label="fragment_detail_product"
+        tools:layout="@layout/fragment_detail_product" >
+
+        <argument
+            android:name="MyArg"
+            app:argType="com.example.first_project.ui.products.Product" />
     </fragment>
 </navigation>

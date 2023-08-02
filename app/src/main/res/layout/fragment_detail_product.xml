@@ -7,7 +7,8 @@
     android:layout_margin="3dp"
     app:cardCornerRadius="6dp"
     app:cardElevation="5dp"
-    app:cardUseCompatPadding="true">
+    app:cardUseCompatPadding="true"
+    tools:context=".ui.fragments.DetailProductFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,9 +19,9 @@
             android:id="@+id/picture"
             android:layout_width="0dp"
             android:layout_height="200dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,19 +47,31 @@
             tools:text="Brand of protein" />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/cost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:ellipsize="end"
-            android:maxLines="3"
+            android:layout_marginTop="5dp"
             android:textColor="#515151"
             android:textSize="14sp"
             android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/description"
+            app:layout_constraintEnd_toEndOf="@id/brand"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/brand"
+            tools:text="Средняя стоимость: 2500 рублей"/>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#515151"
+            android:textSize="14sp"
+            android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cost"
             tools:text="Description of item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

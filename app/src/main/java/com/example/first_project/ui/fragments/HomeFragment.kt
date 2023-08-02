@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.first_project.R
@@ -36,13 +37,19 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             if (!favouriteItemsList.contains(product)) {
                 favouriteItemsList.add(product)
                 product.likeElement = true
-                Unit
             }
             else {
                  Toast.makeText(requireContext(), getString(R.string.toast_add), Toast.LENGTH_SHORT).show()
             }
         }
+
+        /*val onFullItemClick = { product: Product ->
+            val action = HomeFragmentDirections.actionItemHomeToDetailProductFragment2(product)
+            findNavController().navigate(action)
+        }*/
+
         adapter.onItemClick = onItemClick
+        /*adapter.onFullItemClick = onFullItemClick*/
 
         binding.recyclerView.adapter = adapter
         adapter.submitList(products)

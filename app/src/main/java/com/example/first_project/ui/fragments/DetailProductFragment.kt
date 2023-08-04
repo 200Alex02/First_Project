@@ -19,7 +19,7 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*val args: DetailProductFragmentArgs by navArgs()
+        val args: DetailProductFragmentArgs by navArgs()
         val product = args.MyArg
 
         binding.brand.text = product.brand
@@ -30,7 +30,7 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>(
             .centerCrop()
             .error(R.drawable.error)
             .placeholder(R.drawable.error)
-            .into(binding.picture)*/
+            .into(binding.picture)
     }
 
 }

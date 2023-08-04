@@ -58,13 +58,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             }
         }
 
-        /*val onFullItemClick = { product: Product ->
+        val onFullItemClick = { product: Product ->
             val action = HomeFragmentDirections.actionItemHomeToDetailProductFragment2(product)
             findNavController().navigate(action)
-        }*/
+        }
 
         adapter.onItemClick = onItemClick
-        /*adapter.onFullItemClick = onFullItemClick*/
+        adapter.onFullItemClick = onFullItemClick
 
         binding.recyclerView.adapter = adapter
         adapter.submitList(products)

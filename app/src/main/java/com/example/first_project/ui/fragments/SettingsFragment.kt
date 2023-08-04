@@ -46,12 +46,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
 
             if (isChecked) {
                 hideSystemUI()
-
             } else {
                 showSystemUI()
-
             }
-
         }
     }
 

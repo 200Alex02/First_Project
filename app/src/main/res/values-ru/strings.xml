@@ -21,5 +21,6 @@
     <string name="insert_a_link_to_a_photo_of_your_product">Вставьте ссылку на фото:</string>
     <string name="preview_your_product">Превью вашего продукта</string>
     <string name="please_fill_in_this_field">Пожалуйста, заполните это поле</string>
+    <string name="fragment_detail_product">Подробнее</string>
 
 </resources>

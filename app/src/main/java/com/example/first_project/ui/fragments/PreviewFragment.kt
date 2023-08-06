@@ -3,10 +3,7 @@ package com.example.first_project.ui.fragments
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.first_project.R
@@ -15,7 +12,6 @@ import com.example.first_project.products
 import com.example.first_project.ui.BaseFragment
 import com.example.first_project.ui.products.Product
 import com.google.gson.Gson
-
 
 class PreviewFragment : BaseFragment<FragmentPreviewBinding>(
     FragmentPreviewBinding::inflate

@@ -33,32 +33,5 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.up_menu, menu)
-        return true
-    }*/
-/*
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.add_your_elements -> {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.nav_host_fragment, AddProductFragment())
-                    .commit()
-
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }*/
-
-    /*override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        val menuItem = menu?.findItem(R.id.add_your_elements)
-        menuItem?.isVisible =
-            when (supportFragmentManager.findFragmentById(R.id.nav_host_fragment)) {
-                is MainFragment -> true
-                else -> false
-            }
-        return true
-    }*/
 }
 

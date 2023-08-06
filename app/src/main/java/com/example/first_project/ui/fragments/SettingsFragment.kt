@@ -1,13 +1,11 @@
 package com.example.first_project.ui.fragments
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentSettingsBinding

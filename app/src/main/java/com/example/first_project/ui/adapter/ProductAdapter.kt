@@ -1,7 +1,6 @@
 package com.example.first_project.ui.adapter
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +11,6 @@ import com.bumptech.glide.Glide
 import com.example.first_project.ui.products.Product
 import com.example.first_project.R
 import com.example.first_project.databinding.ItemProductsBinding
-import com.example.first_project.ui.favourite.favouriteItemsList
-import com.example.first_project.products
-import com.example.first_project.ui.fragments.DetailProductFragment
 
 class ProductAdapter() : ListAdapter<Product, ProductAdapter.ProductHolder>(DiffCallBack()) {
     var onItemClick: (product: Product) -> Unit = { _ -> }

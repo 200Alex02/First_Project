@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.first_project.R
 import com.example.first_project.databinding.ItemFavouritesBinding
-import com.example.first_project.databinding.ItemProductsBinding
 import com.example.first_project.ui.products.Product
 
 class FavouriteAdapter() : ListAdapter<Product, FavouriteAdapter.FavouriteHolder>(DiffCallBack()) {

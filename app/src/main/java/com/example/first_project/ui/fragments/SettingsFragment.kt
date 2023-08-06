@@ -1,6 +1,7 @@
 package com.example.first_project.ui.fragments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MotionEvent
@@ -17,11 +18,20 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
 ) {
 
     private lateinit var sharedPreferences: SharedPreferences
+
     @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sharedPreferences =
+            requireActivity().getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
+        binding.nightThemeSwitch.isChecked = sharedPreferences.getBoolean("switchTheme", false)
+        binding.fullScreenSwitch.isChecked = sharedPreferences.getBoolean("switchScreen", false)
+        /*binding.btnLanguage.text = sharedPreferences.getString("switchLang", "")*/
+
         binding.nightThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
+
+            sharedPreferences.edit().putBoolean("switchTheme", isChecked).apply()
 
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -34,6 +44,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
         }
 
         binding.btnLanguage.setOnTouchListener { _, event ->
+
             if (event.action == MotionEvent.ACTION_UP) {
                 showPopupMenu(binding.btnLanguage)
             }
@@ -41,6 +52,8 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
         }
 
         binding.fullScreenSwitch.setOnCheckedChangeListener { _, isChecked ->
+
+            sharedPreferences.edit().putBoolean("switchScreen", isChecked).apply()
 
             if (isChecked) {
                 hideSystemUI()
@@ -55,6 +68,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
         popup.inflate(R.menu.popup_menu)
 
         popup.setOnMenuItemClickListener {
+
+            sharedPreferences.edit().putString("switchLang", it.title.toString()).apply()
+
             when (it.itemId) {
                 R.id.english_item -> {
                     change("en")

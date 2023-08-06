@@ -5,11 +5,13 @@ import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -24,6 +26,7 @@ import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.products
 import com.example.first_project.ui.BaseFragment
 import com.example.first_project.ui.products.Product
+import java.util.Locale
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     FragmentHomeBinding::inflate
@@ -32,10 +35,44 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private var isFabVisible = true
     private val CHANNEL_ID = "channel_id"
     private val notificationId = 101
+    private lateinit var sharedPreferences: SharedPreferences
 
     @SuppressLint("ShowToast")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sharedPreferences =
+            requireActivity().getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
+
+        val switchTheme = sharedPreferences.getBoolean("switchTheme", false)
+
+        if (switchTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
+        val switchScreen = sharedPreferences.getBoolean("switchScreen", false)
+
+        if (switchScreen) {
+            hideSystemUI()
+        } else {
+            showSystemUI()
+        }
+
+        when (sharedPreferences.getString("switchLang", "")) {
+            "English" -> {
+                change("en")
+            }
+
+            "Russian" -> {
+                change("ru")
+            }
+
+            else -> {
+
+            }
+        }
 
         createNotificationChannel()
 
@@ -118,6 +155,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             notify(notificationId, builder.build())
         }
 
+    }
+
+    private fun hideSystemUI() {
+        activity?.window?.decorView?.systemUiVisibility =
+            (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
+    }
+
+    private fun showSystemUI() {
+        activity?.window?.decorView?.systemUiVisibility =
+            (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION and View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
+    }
+
+    fun change(language: String) {
+        val config = resources.configuration
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+        activity?.recreate()
     }
 
 }

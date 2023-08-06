@@ -4,6 +4,7 @@ package com.example.first_project.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentFavouriteBinding
@@ -29,6 +30,12 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>(
             checkPlaceholder()
         }
 
+        val onFullItemClick = { product: Product ->
+            val action = FavouriteFragmentDirections.actionItemFavouriteToDetailProductFragment2(product)
+            findNavController().navigate(action)
+        }
+
+        adapter.onFullItemClick = onFullItemClick
         adapter.onDeleteClick = onDeleteClick
         binding.recyclerViewFavourite.adapter = adapter
         adapter.submitList(favouriteItemsList.toList())

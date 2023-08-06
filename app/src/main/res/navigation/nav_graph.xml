@@ -32,6 +32,10 @@
             app:destination="@id/item_home"
             app:enterAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left" />
+
+        <action
+            android:id="@+id/action_item_favourite_to_detailProductFragment2"
+            app:destination="@id/detailProductFragment2" />
     </fragment>
 
     <fragment

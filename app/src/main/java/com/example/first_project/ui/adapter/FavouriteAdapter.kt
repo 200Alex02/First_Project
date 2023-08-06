@@ -14,7 +14,7 @@ import com.example.first_project.ui.products.Product
 
 class FavouriteAdapter() : ListAdapter<Product, FavouriteAdapter.FavouriteHolder>(DiffCallBack()) {
     var onDeleteClick: (product: Product) -> Unit = { _ -> }
-
+    var onFullItemClick: (product: Product) -> Unit = {_ ->}
     inner class FavouriteHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding = ItemFavouritesBinding.bind(itemView)
@@ -32,6 +32,10 @@ class FavouriteAdapter() : ListAdapter<Product, FavouriteAdapter.FavouriteHolder
 
             icDelete.setOnClickListener {
                 onDeleteClick(product)
+            }
+
+            itemView.setOnClickListener {
+                onFullItemClick(product)
             }
         }
     }

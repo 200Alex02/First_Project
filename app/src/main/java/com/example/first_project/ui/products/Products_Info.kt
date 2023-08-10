@@ -1,6 +1,7 @@
 package com.example.first_project
 
 import com.example.first_project.ui.products.Product
+import com.example.first_project.ui.room.ProductDb
 
 val products = mutableListOf(
     Product(

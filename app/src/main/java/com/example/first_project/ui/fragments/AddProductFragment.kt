@@ -7,7 +7,7 @@ import android.view.View
 import androidx.navigation.Navigation
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentAddProductBinding
-import com.example.first_project.ui.BaseFragment
+import com.example.first_project.ui.basefragment.BaseFragment
 import com.example.first_project.ui.products.Product
 import com.google.gson.Gson
 

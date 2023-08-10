@@ -10,11 +10,11 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,75 +22,39 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentHomeBinding
 import com.example.first_project.ui.adapter.ProductAdapter
-import com.example.first_project.ui.favourite.favouriteItemsList
-import com.example.first_project.products
-import com.example.first_project.ui.BaseFragment
+import com.example.first_project.ui.basefragment.BaseFragment
 import com.example.first_project.ui.products.Product
+import com.example.first_project.ui.room.ProductDb
+import com.example.first_project.ui.room.ProductViewModel
+import com.example.first_project.ui.room.ProductViewModelFactory
 import java.util.Locale
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     FragmentHomeBinding::inflate
 ) {
     private lateinit var adapter: ProductAdapter
+    private lateinit var productViewModel: ProductViewModel
     private var isFabVisible = true
     private val CHANNEL_ID = "channel_id"
     private val notificationId = 101
     private lateinit var sharedPreferences: SharedPreferences
-
-    @SuppressLint("ShowToast")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedPreferences =
-            requireActivity().getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
-
-        val switchTheme = sharedPreferences.getBoolean("switchTheme", false)
-
-        if (switchTheme) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-
-        val switchScreen = sharedPreferences.getBoolean("switchScreen", false)
-
-        if (switchScreen) {
-            hideSystemUI()
-        } else {
-            showSystemUI()
-        }
-
-        when (sharedPreferences.getString("switchLang", "")) {
-            "English" -> {
-                change("en")
-            }
-
-            "Russian" -> {
-                change("ru")
-            }
-
-            else -> {
-
-            }
-        }
-
         createNotificationChannel()
 
-        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
-        adapter = ProductAdapter()
+        val application = requireActivity().application
+        productViewModel = ViewModelProvider(this, ProductViewModelFactory(application))[ProductViewModel::class.java]
 
-        val onItemClick = { product: Product ->
-            if (!favouriteItemsList.contains(product)) {
-                favouriteItemsList.add(product)
-                product.likeElement = true
-                sendNotification(product)
-            } else {
-                Toast.makeText(requireContext(), getString(R.string.toast_add), Toast.LENGTH_SHORT)
-                    .show()
-            }
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
+        adapter = ProductAdapter(emptyList())
+
+        val onItemClick = { productDb: ProductDb ->
+            productViewModel.updateProduct(productDb.copy(likeElement = !productDb.likeElement))
         }
 
-        val onFullItemClick = { product: Product ->
+        val onFullItemClick = { productDb: ProductDb ->
+            val product = Product(productDb)
             val action = HomeFragmentDirections.actionItemHomeToDetailProductFragment2(product)
             findNavController().navigate(action)
         }
@@ -99,7 +63,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         adapter.onFullItemClick = onFullItemClick
 
         binding.recyclerView.adapter = adapter
-        adapter.submitList(products)
+        productViewModel.allProducts.observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+        }
 
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -120,6 +86,51 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 .navigate(R.id.action_item_home_to_addProductFragment)
         }
 
+        checkTheme()
+
+        checkScreen()
+
+        checkLanguage()
+
+    }
+
+    private fun checkLanguage() {
+        when (sharedPreferences.getString("switchLang", "")) {
+            "English" -> {
+                change("en")
+            }
+
+            "Russian" -> {
+                change("ru")
+            }
+
+            else -> {
+
+            }
+        }
+    }
+
+    private fun checkScreen() {
+        val switchScreen = sharedPreferences.getBoolean("switchScreen", false)
+
+        if (switchScreen) {
+            hideSystemUI()
+        } else {
+            showSystemUI()
+        }
+    }
+
+    private fun checkTheme() {
+        sharedPreferences =
+            requireActivity().getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
+
+        val switchTheme = sharedPreferences.getBoolean("switchTheme", false)
+
+        if (switchTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     private fun createNotificationChannel() {
@@ -137,10 +148,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         }
     }
 
-    private fun sendNotification(product: Product) {
+    private fun sendNotification(productDb: ProductDb) {
         val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("${product.brand} был добавлен в избранное")
+            .setContentTitle("${productDb.brand} был добавлен в избранное")
             .setContentText("Зайдите в раздел избранное, чтобы посмотреть")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 

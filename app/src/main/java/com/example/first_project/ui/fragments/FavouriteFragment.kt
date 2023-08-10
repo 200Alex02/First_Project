@@ -8,7 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentFavouriteBinding
-import com.example.first_project.ui.BaseFragment
+import com.example.first_project.ui.basefragment.BaseFragment
 import com.example.first_project.ui.adapter.FavouriteAdapter
 import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.ui.products.Product

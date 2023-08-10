@@ -6,7 +6,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentDetailProductBinding
-import com.example.first_project.ui.BaseFragment
+import com.example.first_project.ui.basefragment.BaseFragment
 
 class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>(
     FragmentDetailProductBinding::inflate

@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentPreviewBinding
 import com.example.first_project.products
-import com.example.first_project.ui.BaseFragment
+import com.example.first_project.ui.basefragment.BaseFragment
 import com.example.first_project.ui.products.Product
 import com.google.gson.Gson
 

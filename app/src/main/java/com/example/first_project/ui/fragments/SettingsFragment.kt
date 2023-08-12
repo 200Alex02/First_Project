@@ -10,7 +10,7 @@ import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentSettingsBinding
-import com.example.first_project.ui.BaseFragment
+import com.example.first_project.ui.basefragment.BaseFragment
 import java.util.Locale
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(

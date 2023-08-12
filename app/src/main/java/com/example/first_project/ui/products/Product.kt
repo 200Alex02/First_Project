@@ -2,11 +2,15 @@ package com.example.first_project.ui.products
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.example.first_project.ui.database.ProductEntity
 
 data class Product(
-    val brand: String, val description: String,
-    val picture: String, val cost: String, var likeElement: Boolean = false
-): Parcelable {
+    val brand: String,
+    val description: String,
+    val picture: String,
+    val cost: String,
+    var likeElement: Boolean = false
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString().toString(),
         parcel.readString().toString(),

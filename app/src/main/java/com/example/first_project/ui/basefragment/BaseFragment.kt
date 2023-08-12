@@ -1,4 +1,4 @@
-package com.example.first_project.ui
+package com.example.first_project.ui.basefragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

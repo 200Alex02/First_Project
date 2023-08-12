@@ -18,8 +18,6 @@ class ProductAdapter() : ListAdapter<Product, ProductAdapter.ProductHolder>(Diff
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding = ItemProductsBinding.bind(itemView)
-
-        @SuppressLint("NotifyDataSetChanged")
         fun bind(product: Product) = with(binding) {
             brand.text = product.brand
             description.text = product.description

@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,55 +26,26 @@ import com.example.first_project.databinding.FragmentHomeBinding
 import com.example.first_project.ui.adapter.ProductAdapter
 import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.products
-import com.example.first_project.ui.BaseFragment
+import com.example.first_project.ui.basefragment.BaseFragment
+import com.example.first_project.ui.database.ProductEntity
+import com.example.first_project.ui.database.ProductMapper
+import com.example.first_project.ui.database.ProductViewModel
 import com.example.first_project.ui.products.Product
 import java.util.Locale
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(
     FragmentHomeBinding::inflate
 ) {
+    private lateinit var productViewModel: ProductViewModel
     private lateinit var adapter: ProductAdapter
     private var isFabVisible = true
     private val CHANNEL_ID = "channel_id"
     private val notificationId = 101
     private lateinit var sharedPreferences: SharedPreferences
-
-    @SuppressLint("ShowToast")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedPreferences =
-            requireActivity().getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
-
-        val switchTheme = sharedPreferences.getBoolean("switchTheme", false)
-
-        if (switchTheme) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-
-        val switchScreen = sharedPreferences.getBoolean("switchScreen", false)
-
-        if (switchScreen) {
-            hideSystemUI()
-        } else {
-            showSystemUI()
-        }
-
-        when (sharedPreferences.getString("switchLang", "")) {
-            "English" -> {
-                change("en")
-            }
-
-            "Russian" -> {
-                change("ru")
-            }
-
-            else -> {
-
-            }
-        }
+        productViewModel = ViewModelProvider(this)[ProductViewModel::class.java]
 
         createNotificationChannel()
 
@@ -80,14 +53,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         adapter = ProductAdapter()
 
         val onItemClick = { product: Product ->
-            if (!favouriteItemsList.contains(product)) {
-                favouriteItemsList.add(product)
-                product.likeElement = true
-                sendNotification(product)
-            } else {
-                Toast.makeText(requireContext(), getString(R.string.toast_add), Toast.LENGTH_SHORT)
-                    .show()
-            }
+            val productEntity: ProductEntity = ProductMapper.toProductEntity(product)
+            productViewModel.addProduct(productEntity)
         }
 
         val onFullItemClick = { product: Product ->
@@ -120,6 +87,51 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
                 .navigate(R.id.action_item_home_to_addProductFragment)
         }
 
+        checkTheme()
+
+        checkScreen()
+
+        checkLanguage()
+
+    }
+
+    private fun checkLanguage() {
+        when (sharedPreferences.getString("switchLang", "")) {
+            "English" -> {
+                change("en")
+            }
+
+            "Russian" -> {
+                change("ru")
+            }
+
+            else -> {
+
+            }
+        }
+    }
+
+    private fun checkScreen() {
+        val switchScreen = sharedPreferences.getBoolean("switchScreen", false)
+
+        if (switchScreen) {
+            hideSystemUI()
+        } else {
+            showSystemUI()
+        }
+    }
+
+    private fun checkTheme() {
+        sharedPreferences =
+            requireActivity().getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
+
+        val switchTheme = sharedPreferences.getBoolean("switchTheme", false)
+
+        if (switchTheme) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     private fun createNotificationChannel() {

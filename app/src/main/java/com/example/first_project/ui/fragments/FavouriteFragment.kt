@@ -1,60 +1,64 @@
 package com.example.first_project.ui.fragments
 
-
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentFavouriteBinding
-import com.example.first_project.ui.BaseFragment
+import com.example.first_project.ui.basefragment.BaseFragment
 import com.example.first_project.ui.adapter.FavouriteAdapter
+import com.example.first_project.ui.database.ProductEntity
+import com.example.first_project.ui.database.ProductMapper
+import com.example.first_project.ui.database.ProductViewModel
 import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.ui.products.Product
 
 class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>(
     FragmentFavouriteBinding::inflate
 ) {
+    private lateinit var productViewModel: ProductViewModel
     private lateinit var adapter: FavouriteAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        checkPlaceholder()
         binding.recyclerViewFavourite.layoutManager = LinearLayoutManager(requireContext())
         adapter = FavouriteAdapter()
+        binding.recyclerViewFavourite.adapter = adapter
 
-        val onDeleteClick = { product: Product ->
-            favouriteItemsList.remove(product)
-            adapter.submitList(favouriteItemsList.toList())
-            checkPlaceholder()
+        val onDeleteClick = { productEntity: ProductEntity ->
+            productViewModel.deleteProduct(productEntity.id)
         }
 
-        val onFullItemClick = { product: Product ->
-            val action = FavouriteFragmentDirections.actionItemFavouriteToDetailProductFragment2(product)
+        val onFullItemClick = { productEntity: ProductEntity ->
+            val product: Product = ProductMapper.fromProductEntity(productEntity)
+            val action =
+                FavouriteFragmentDirections.actionItemFavouriteToDetailProductFragment2(product)
             findNavController().navigate(action)
         }
 
         adapter.onFullItemClick = onFullItemClick
         adapter.onDeleteClick = onDeleteClick
-        binding.recyclerViewFavourite.adapter = adapter
-        adapter.submitList(favouriteItemsList.toList())
+
+        productViewModel = ViewModelProvider(this)[ProductViewModel::class.java]
+
+        productViewModel.getAllProducts.observe(viewLifecycleOwner, Observer { productEntity ->
+            adapter.submitList(productEntity)
+            if (productEntity.isEmpty()) {
+                binding.placeHolder.visibility = View.VISIBLE
+                binding.layoutWithRc.visibility = View.INVISIBLE
+            } else {
+                binding.layoutWithRc.visibility = View.VISIBLE
+                binding.placeHolder.visibility = View.INVISIBLE
+            }
+        })
 
         binding.addNewElements.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_item_favourite_to_item_home)
         }
-
     }
-
-    private fun checkPlaceholder() {
-        if (favouriteItemsList.isEmpty()) {
-            binding.placeHolder.visibility = View.VISIBLE
-            binding.layoutWithRc.visibility = View.INVISIBLE
-        } else {
-            binding.layoutWithRc.visibility = View.VISIBLE
-            binding.placeHolder.visibility = View.INVISIBLE
-        }
-    }
-
 }

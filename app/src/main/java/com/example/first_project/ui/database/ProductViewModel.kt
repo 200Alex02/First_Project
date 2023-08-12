@@ -31,4 +31,10 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    fun deleteAllProducts() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllProducts()
+        }
+    }
+
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentFavouriteBinding
 import com.example.first_project.ui.basefragment.BaseFragment
@@ -14,6 +15,7 @@ import com.example.first_project.ui.adapter.FavouriteAdapter
 import com.example.first_project.ui.database.ProductEntity
 import com.example.first_project.ui.database.ProductMapper
 import com.example.first_project.ui.database.ProductViewModel
+import com.example.first_project.ui.dialogfragment.ClearFavoritesDialogFragment
 import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.ui.products.Product
 
@@ -22,6 +24,7 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>(
 ) {
     private lateinit var productViewModel: ProductViewModel
     private lateinit var adapter: FavouriteAdapter
+    private var isFabVisible = true
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -60,5 +63,27 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>(
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_item_favourite_to_item_home)
         }
+
+        binding.removeFloatingBtn.setOnClickListener {
+            showClearDialogFragment()
+        }
+
+        binding.recyclerViewFavourite.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0 && isFabVisible) {
+                    binding.removeFloatingBtn.hide()
+                    isFabVisible = false
+                } else if (dy < 0 && !isFabVisible) {
+                    binding.removeFloatingBtn.show()
+                    isFabVisible = true
+                }
+            }
+        })
+    }
+
+    fun showClearDialogFragment() {
+        val dialogFragment = ClearFavoritesDialogFragment()
+        dialogFragment.show(parentFragmentManager, "clearFavouritesDialog")
     }
 }

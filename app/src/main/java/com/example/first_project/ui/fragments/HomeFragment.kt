@@ -9,9 +9,12 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -88,11 +91,35 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         }
 
         checkTheme()
-
         checkScreen()
-
         checkLanguage()
+        setHasOptionsMenu(true)
+    }
 
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu, menu)
+
+        val searchItem = menu.findItem(R.id.search_item)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterRecyclerView(newText.orEmpty())
+                return true
+            }
+        })
+    }
+
+    private fun filterRecyclerView(query: String) {
+        val filteredList = products.filter { item ->
+            item.brand.contains(query, ignoreCase = true)
+        }
+        adapter.submitList(filteredList)
     }
 
     private fun checkLanguage() {
@@ -106,14 +133,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             }
 
             else -> {
-
             }
         }
     }
 
     private fun checkScreen() {
         val switchScreen = sharedPreferences.getBoolean("switchScreen", false)
-
         if (switchScreen) {
             hideSystemUI()
         } else {
@@ -124,9 +149,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private fun checkTheme() {
         sharedPreferences =
             requireActivity().getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
-
         val switchTheme = sharedPreferences.getBoolean("switchTheme", false)
-
         if (switchTheme) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
@@ -187,5 +210,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         resources.updateConfiguration(config, resources.displayMetrics)
         activity?.recreate()
     }
-
 }

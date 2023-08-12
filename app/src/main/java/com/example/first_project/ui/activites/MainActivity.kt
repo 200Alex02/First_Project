@@ -28,13 +28,11 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment)
         setupActionBarWithNavController(navController)
         binding.bottomNavView.setupWithNavController(navController)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
 }
 

@@ -4,15 +4,12 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.first_project.products
 import com.example.first_project.ui.database.AppDatabase
 import com.example.first_project.ui.database.ProductEntity
 import com.example.first_project.ui.database.ProductMapper
 import com.example.first_project.ui.database.ProductRepository
-import com.example.first_project.ui.fragments.FavouriteFragmentDirections
-import com.example.first_project.ui.products.Product
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

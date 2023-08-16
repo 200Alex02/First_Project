@@ -1,6 +1,5 @@
 package com.example.first_project.ui.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.example.first_project.R
 import com.example.first_project.databinding.ItemFavouritesBinding
 import com.example.first_project.ui.database.ProductEntity
-import com.example.first_project.ui.products.Product
 
 class FavouriteAdapter() : ListAdapter<ProductEntity, FavouriteAdapter.FavouriteHolder>(DiffCallBack()) {
     var onDeleteClick: (productEntity: ProductEntity) -> Unit = { _ -> }

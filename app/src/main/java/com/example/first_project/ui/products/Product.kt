@@ -2,7 +2,6 @@ package com.example.first_project.ui.products
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.example.first_project.ui.database.ProductEntity
 
 data class Product(
     val brand: String,

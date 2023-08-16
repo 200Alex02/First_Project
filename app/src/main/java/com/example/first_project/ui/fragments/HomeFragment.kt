@@ -1,18 +1,16 @@
 package com.example.first_project.ui.fragments
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
@@ -27,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.first_project.R
 import com.example.first_project.databinding.FragmentHomeBinding
 import com.example.first_project.ui.adapter.ProductAdapter
-import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.products
 import com.example.first_project.ui.basefragment.BaseFragment
 import com.example.first_project.ui.database.ProductEntity
@@ -42,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private lateinit var productViewModel: ProductViewModel
     private lateinit var adapter: ProductAdapter
     private var isFabVisible = true
-    private val CHANNEL_ID = "channel_id"
+    private val channelId = "channel_id"
     private val notificationId = 101
     private lateinit var sharedPreferences: SharedPreferences
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,6 +55,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         val onItemClick = { product: Product ->
             val productEntity: ProductEntity = ProductMapper.toProductEntity(product)
             productViewModel.addProduct(productEntity)
+            sendNotification(product)
+            product.likeElement = true
+        }
+
+        val onItemLongClick = { product: Product ->
+            productViewModel.deleteProduct(product)
+            product.likeElement = false
         }
 
         val onFullItemClick = { product: Product ->
@@ -67,6 +71,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
 
         adapter.onItemClick = onItemClick
         adapter.onFullItemClick = onFullItemClick
+        adapter.onItemLongClick = onItemLongClick
 
         binding.recyclerView.adapter = adapter
         adapter.submitList(products)
@@ -136,6 +141,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         }
     }
 
+    private fun change(language: String) {
+        val config = resources.configuration
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+        activity?.recreate()
+    }
+
     private fun checkScreen() {
         val switchScreen = sharedPreferences.getBoolean("switchScreen", false)
         if (switchScreen) {
@@ -157,22 +171,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     }
 
     private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Notification title"
-            val descriptionText = "Notification description"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
-                description = descriptionText
-            }
-            val notificationManager: NotificationManager = requireActivity()
-                .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-            notificationManager.createNotificationChannel(channel)
+        val name = "Notification title"
+        val descriptionText = "Notification description"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(channelId, name, importance).apply {
+            description = descriptionText
         }
+        val notificationManager: NotificationManager = requireActivity()
+            .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationManager.createNotificationChannel(channel)
     }
 
     private fun sendNotification(product: Product) {
-        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+        val builder = NotificationCompat.Builder(requireContext(), channelId)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("${product.brand} был добавлен в избранное")
             .setContentText("Зайдите в раздел избранное, чтобы посмотреть")
@@ -199,14 +211,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
     private fun showSystemUI() {
         activity?.window?.decorView?.systemUiVisibility =
             (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION and View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-    }
-
-    fun change(language: String) {
-        val config = resources.configuration
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
-        activity?.recreate()
     }
 }

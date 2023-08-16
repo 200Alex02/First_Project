@@ -14,26 +14,27 @@ import com.example.first_project.ui.basefragment.BaseFragment
 import com.example.first_project.ui.adapter.FavouriteAdapter
 import com.example.first_project.ui.database.ProductEntity
 import com.example.first_project.ui.database.ProductMapper
-import com.example.first_project.ui.database.ProductViewModel
 import com.example.first_project.ui.dialogfragment.ClearFavoritesDialogFragment
-import com.example.first_project.ui.favourite.favouriteItemsList
 import com.example.first_project.ui.products.Product
+import com.example.first_project.ui.viewmodels.FavouriteViewModel
 
 class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>(
     FragmentFavouriteBinding::inflate
 ) {
-    private lateinit var productViewModel: ProductViewModel
+    private lateinit var favouriteViewModel: FavouriteViewModel
     private lateinit var adapter: FavouriteAdapter
     private var isFabVisible = true
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        favouriteViewModel = ViewModelProvider(this)[FavouriteViewModel::class.java]
 
         binding.recyclerViewFavourite.layoutManager = LinearLayoutManager(requireContext())
         adapter = FavouriteAdapter()
         binding.recyclerViewFavourite.adapter = adapter
 
         val onDeleteClick = { productEntity: ProductEntity ->
-            productViewModel.deleteProduct(productEntity.id)
+            favouriteViewModel.deleteProduct(productEntity)
         }
 
         val onFullItemClick = { productEntity: ProductEntity ->
@@ -46,9 +47,7 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>(
         adapter.onFullItemClick = onFullItemClick
         adapter.onDeleteClick = onDeleteClick
 
-        productViewModel = ViewModelProvider(this)[ProductViewModel::class.java]
-
-        productViewModel.getAllProducts.observe(viewLifecycleOwner, Observer { productEntity ->
+        favouriteViewModel.getAllProducts.observe(viewLifecycleOwner, Observer { productEntity ->
             adapter.submitList(productEntity)
             if (productEntity.isEmpty()) {
                 binding.placeHolder.visibility = View.VISIBLE
@@ -82,7 +81,7 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>(
         })
     }
 
-    fun showClearDialogFragment() {
+    private fun showClearDialogFragment() {
         val dialogFragment = ClearFavoritesDialogFragment()
         dialogFragment.show(parentFragmentManager, "clearFavouritesDialog")
     }

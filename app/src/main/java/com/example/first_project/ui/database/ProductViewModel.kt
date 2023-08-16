@@ -1,9 +1,11 @@
 package com.example.first_project.ui.database
 
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.first_project.ui.products.Product
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -18,16 +20,15 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         getAllProducts = repository.getAllProducts
     }
 
-
     fun addProduct(productEntity: ProductEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addProduct(productEntity)
         }
     }
 
-    fun deleteProduct(productId: Long) {
+    fun deleteProduct(product: Product) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteProduct(productId)
+            repository.deleteProduct(product.brand)
         }
     }
 

@@ -11,14 +11,14 @@ interface ProductDao {
     @Insert
     suspend fun addProduct(productEntity: ProductEntity)
 
-    @Query("SELECT * FROM productsDb WHERE id = :productId")
-    fun getProductById(productId: Long): ProductEntity?
+    @Query("SELECT * FROM productsDb WHERE brand = :brand")
+    fun getProductByBrand(brand: String): ProductEntity?
 
     @Query("SELECT * FROM productsDb")
     fun getAllProducts(): LiveData<List<ProductEntity>>
 
-    @Query("DELETE FROM productsDb WHERE id = :productId")
-    suspend fun deleteProduct(productId: Long)
+    @Query("DELETE FROM productsDb WHERE brand = :brand")
+    suspend fun deleteProduct(brand: String)
 
     @Query("DELETE FROM productsDb")
     suspend fun deleteAllProducts()

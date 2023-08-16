@@ -1,6 +1,5 @@
 package com.example.first_project.ui.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +13,16 @@ import com.example.first_project.databinding.ItemProductsBinding
 
 class ProductAdapter() : ListAdapter<Product, ProductAdapter.ProductHolder>(DiffCallBack()) {
     var onItemClick: (product: Product) -> Unit = { _ -> }
-    var onFullItemClick: (product: Product) -> Unit = {_ ->}
+    var onItemLongClick: (product: Product) -> Unit = { _ -> }
+    var onFullItemClick: (product: Product) -> Unit = { _ -> }
+
     inner class ProductHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding = ItemProductsBinding.bind(itemView)
         fun bind(product: Product) = with(binding) {
+
+            checkIsLike(product.likeElement)
+
             brand.text = product.brand
             description.text = product.description
             Glide.with(itemView.context)
@@ -33,11 +37,23 @@ class ProductAdapter() : ListAdapter<Product, ProductAdapter.ProductHolder>(Diff
                 binding.favouriteIcon.setImageResource(R.drawable.ic_favourite_red)
             }
 
+            favouriteIcon.setOnLongClickListener {
+                onItemLongClick(product)
+                true
+            }
+
             itemView.setOnClickListener {
                 onFullItemClick(product)
             }
         }
 
+        private fun checkIsLike(isLike: Boolean) {
+            if (isLike) {
+                binding.favouriteIcon.setImageResource(R.drawable.ic_favourite_red)
+            } else {
+                binding.favouriteIcon.setImageResource(R.drawable.ic_favorite_item)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductHolder {

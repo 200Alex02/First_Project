@@ -25,9 +25,9 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
 
         sharedPreferences =
             requireActivity().getSharedPreferences("MyPreference", Context.MODE_PRIVATE)
+
         binding.nightThemeSwitch.isChecked = sharedPreferences.getBoolean("switchTheme", false)
         binding.fullScreenSwitch.isChecked = sharedPreferences.getBoolean("switchScreen", false)
-        /*binding.btnLanguage.text = sharedPreferences.getString("switchLang", "")*/
 
         binding.nightThemeSwitch.setOnCheckedChangeListener { _, isChecked ->
 

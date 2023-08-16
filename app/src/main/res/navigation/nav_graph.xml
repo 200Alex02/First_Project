@@ -42,7 +42,12 @@
         android:id="@+id/item_settings"
         android:name="com.example.first_project.ui.fragments.SettingsFragment"
         android:label="@string/settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_item_settings_to_item_favourite"
+            app:destination="@id/item_favourite"
+            app:popUpTo="@id/item_favourite" />
+    </fragment>
     <fragment
         android:id="@+id/addProductFragment"
         android:name="com.example.first_project.ui.fragments.AddProductFragment"

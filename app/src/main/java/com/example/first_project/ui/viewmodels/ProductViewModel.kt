@@ -1,9 +1,12 @@
-package com.example.first_project.ui.database
+package com.example.first_project.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.example.first_project.ui.database.AppDatabase
+import com.example.first_project.ui.database.ProductEntity
+import com.example.first_project.ui.database.ProductRepository
 import com.example.first_project.ui.products.Product
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

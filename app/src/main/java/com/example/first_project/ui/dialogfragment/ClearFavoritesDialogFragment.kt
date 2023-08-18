@@ -5,7 +5,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.first_project.ui.database.ProductViewModel
+import com.example.first_project.ui.viewmodels.ProductViewModel
 import java.lang.IllegalStateException
 
 class ClearFavoritesDialogFragment : DialogFragment() {

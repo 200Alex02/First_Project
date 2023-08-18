@@ -15,6 +15,9 @@ import com.example.first_project.ui.adapter.FavouriteAdapter
 import com.example.first_project.ui.database.ProductEntity
 import com.example.first_project.ui.database.ProductMapper
 import com.example.first_project.ui.dialogfragment.ClearFavoritesDialogFragment
+import com.example.first_project.ui.extentions.gone
+import com.example.first_project.ui.extentions.invisible
+import com.example.first_project.ui.extentions.visible
 import com.example.first_project.ui.products.Product
 import com.example.first_project.ui.viewmodels.FavouriteViewModel
 
@@ -50,11 +53,13 @@ class FavouriteFragment : BaseFragment<FragmentFavouriteBinding>(
         favouriteViewModel.getAllProducts.observe(viewLifecycleOwner, Observer { productEntity ->
             adapter.submitList(productEntity)
             if (productEntity.isEmpty()) {
-                binding.placeHolder.visibility = View.VISIBLE
-                binding.layoutWithRc.visibility = View.INVISIBLE
+                binding.placeHolder.visible()
+                binding.layoutWithRc.invisible()
+                binding.removeFloatingBtn.gone()
             } else {
-                binding.layoutWithRc.visibility = View.VISIBLE
-                binding.placeHolder.visibility = View.INVISIBLE
+                binding.layoutWithRc.visible()
+                binding.placeHolder.invisible()
+                binding.removeFloatingBtn.visible()
             }
         })
 

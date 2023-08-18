@@ -79,5 +79,8 @@
         <argument
             android:name="MyArg"
             app:argType="com.example.first_project.ui.products.Product" />
+        <action
+            android:id="@+id/action_detailProductFragment2_to_item_favourite"
+            app:destination="@id/item_favourite" />
     </fragment>
 </navigation>

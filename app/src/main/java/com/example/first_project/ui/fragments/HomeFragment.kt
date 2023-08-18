@@ -15,6 +15,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -27,7 +28,7 @@ import com.example.first_project.products
 import com.example.first_project.ui.basefragment.BaseFragment
 import com.example.first_project.ui.database.ProductEntity
 import com.example.first_project.ui.database.ProductMapper
-import com.example.first_project.ui.database.ProductViewModel
+import com.example.first_project.ui.viewmodels.ProductViewModel
 import com.example.first_project.ui.products.Product
 import java.util.Locale
 
@@ -53,8 +54,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
         val onItemClick = { product: Product ->
             val productEntity: ProductEntity = ProductMapper.toProductEntity(product)
             productViewModel.addProduct(productEntity)
-            sendNotification(product)
             product.likeElement = true
+            sendNotification(product)
         }
 
         val onItemLongClick = { product: Product ->

@@ -1,7 +1,5 @@
 package com.example.first_project.ui.activites
 
-
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -11,12 +9,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.first_project.R
 import com.example.first_project.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    private var previousFragmentId: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -27,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
         binding.bottomNavView.setupWithNavController(navController)
     }
+
     override fun onSupportNavigateUp(): Boolean {
 
         val currentDestination = navController.currentDestination?.id

@@ -31,20 +31,12 @@ class FavouriteViewModel(application: Application) : AndroidViewModel(applicatio
         viewModelScope.launch(Dispatchers.IO) {
             val product = repository.getProductById(productEntity.brand)
             repository.deleteProduct(productEntity.brand)
-            Log.i("1", "${productEntity}")
-            Log.i("2", "${product}")
             val productNorm = product?.let { ProductMapper.fromProductEntity(it) }
             for (prod in products) {
-                if (prod == productNorm) {
+                if (prod.brand == productNorm?.brand) {
                     prod.likeElement = false
                 }
             }
-        }
-    }
-
-    fun deleteAllProducts() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.deleteAllProducts()
         }
     }
 }

@@ -55,12 +55,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(
             val productEntity: ProductEntity = ProductMapper.toProductEntity(product)
             productViewModel.addProduct(productEntity)
             product.likeElement = true
+            adapter.submitList(products)
             sendNotification(product)
         }
 
         val onItemLongClick = { product: Product ->
             productViewModel.deleteProduct(product)
             product.likeElement = false
+            adapter.submitList(products)
         }
 
         val onFullItemClick = { product: Product ->

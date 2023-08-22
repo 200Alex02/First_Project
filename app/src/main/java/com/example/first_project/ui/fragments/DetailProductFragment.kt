@@ -11,13 +11,13 @@ import com.example.first_project.databinding.FragmentDetailProductBinding
 import com.example.first_project.ui.basefragment.BaseFragment
 import com.example.first_project.ui.database.ProductEntity
 import com.example.first_project.ui.database.ProductMapper
+import com.example.first_project.ui.products.Product
 import com.example.first_project.ui.viewmodels.ProductViewModel
 
 class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>(
     FragmentDetailProductBinding::inflate
 ) {
     private lateinit var viewModel: ProductViewModel
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -26,6 +26,14 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>(
         val args: DetailProductFragmentArgs by navArgs()
         val product = args.MyArg
 
+        loadData(product)
+
+        binding.favouriteIcon.setOnClickListener {
+            addProduct(product)
+        }
+    }
+
+    private fun loadData(product: Product) {
         binding.brand.text = product.brand
         binding.description.text = product.description
         binding.cost.text = product.cost
@@ -35,17 +43,16 @@ class DetailProductFragment : BaseFragment<FragmentDetailProductBinding>(
             .error(R.drawable.error)
             .placeholder(R.drawable.error)
             .into(binding.picture)
-
-        binding.favouriteIcon.setOnClickListener {
-            viewModel.addProduct(
-                ProductEntity(
-                    0, product.brand, product.description,
-                    product.picture, product.cost, product.likeElement
-                )
-            )
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_detailProductFragment2_to_item_favourite)
-        }
     }
 
+    private fun addProduct(product: Product) {
+        viewModel.addProduct(
+            ProductEntity(
+                0, product.brand, product.description,
+                product.picture, product.cost, product.likeElement
+            )
+        )
+        Navigation.findNavController(binding.root)
+            .navigate(R.id.action_detailProductFragment2_to_item_favourite)
+    }
 }

@@ -34,7 +34,7 @@ class ProductAdapter() : ListAdapter<Product, ProductAdapter.ProductHolder>(Diff
 
             favouriteIcon.setOnClickListener {
                 onItemClick(product)
-                binding.favouriteIcon.setImageResource(R.drawable.ic_favourite_red)
+                binding.favouriteIcon.setImageResource(R.drawable.ic_favourite_red_item)
             }
 
             favouriteIcon.setOnLongClickListener {
@@ -49,7 +49,7 @@ class ProductAdapter() : ListAdapter<Product, ProductAdapter.ProductHolder>(Diff
 
         private fun checkIsLike(isLike: Boolean) {
             if (isLike) {
-                binding.favouriteIcon.setImageResource(R.drawable.ic_favourite_red)
+                binding.favouriteIcon.setImageResource(R.drawable.ic_favourite_red_item)
             } else {
                 binding.favouriteIcon.setImageResource(R.drawable.ic_favorite_item)
             }

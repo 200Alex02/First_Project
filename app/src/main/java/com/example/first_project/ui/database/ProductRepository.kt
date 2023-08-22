@@ -21,7 +21,7 @@ class ProductRepository(private val productDao: ProductDao) {
         productDao.deleteAllProducts()
     }
 
-    suspend fun getProductById(brand: String): ProductEntity? {
+    suspend fun getProductByBrand(brand: String): ProductEntity? {
         return productDao.getProductByBrand(brand)
     }
 }
